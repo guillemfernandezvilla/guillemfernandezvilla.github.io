@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guillem Fernández Villà - Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #faf8f3;
+            --dark: #1a1a1a;
+            --accent: #8b6f47;
+            --light-accent: #c4a574;
+            --text-gray: #4a4a4a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+        
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        header {
+            margin-bottom: 80px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            animation: slideIn 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .photo-container {
+            flex-shrink: 0;
+            position: relative;
+            width: 250px;
+            height: 300px;
+        }
+        
+        .photo-frame {
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 20px rgba(139, 111, 71, 0.15),
+                0 0 0 1px rgba(139, 111, 71, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .photo-frame:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 8px 30px rgba(139, 111, 71, 0.2),
+                0 0 0 1px rgba(139, 111, 71, 0.15);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--light-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 18px;
+            color: var(--cream);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .header-text {
+            flex: 1;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-gray);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .contact-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .contact-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .contact-links a:hover::after {
+            width: 100%;
+        }
+        
+        .contact-links a:hover {
+            color: var(--dark);
+        }
+        
+        main {
+            animation: slideIn 0.8s ease-out 0.4s both;
+        }
+        
+        section {
+            margin-bottom: 70px;
+        }
+        
+        section:last-child {
+            margin-bottom: 0;
+        }
+        
+        h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        p {
+            font-size: 16px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            max-width: 720px;
+        }
+        
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .project-list, .publication-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        .project-list li, .publication-list li {
+            margin-bottom: 30px;
+            padding-left: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-list li:hover, .publication-list li:hover {
+            transform: translateX(5px);
+        }
+        
+        .project-list li::before, .publication-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-list li:hover::before, .publication-list li:hover::before {
+            transform: translateX(3px);
+        }
+        
+        .project-title, .publication-title {
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+        
+        .project-description, .publication-description {
+            font-size: 15px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(139, 111, 71, 0.2);
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 14px;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 50px 30px;
+            }
+            
+            .photo-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <div class="container">
+        <header>
+            <div class="photo-container">
+                <div class="photo-frame">
+                    <img src="Picture1.jpg" alt="Guillem Fernández Villà"> 
+                    <div class="photo-placeholder">Your Photo Here</div>
+                </div>
+            </div>
+            
+            <div class="header-text">
+                <h1>Guillem<br>Fernández Villà</h1>
+                <p class="subtitle">PhD Candidate in Social Psychology<br>Cultural Psychology Researcher</p>
+                <div class="contact-links">
+                    <a href="mailto:fvguillem@gmail.com">Email</a>
+                    <a href="https://scholar.google.com/citations?user=gbX1AHUAAAAJ&hl=nl" target="_blank">Google Scholar</a>
+                    <a href="cv_gfv.pdf" target="_blank">CV</a>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section>
+                <h2>Current Research</h2>
+                <p>
+                    My dissertation research examines how perceptions of immigrants are shaped by vicarious intergroup contact 
+                    and sociolinguistic cues. I investigate how accent and place of origin influence interpersonal inferences 
+                    and engagement with immigrant communities.
+                </p>
+                <p>
+                    I am particularly interested in how emotional acculturation processes affect immigrant wellbeing and how 
+                    cultural psychology frameworks can inform our understanding of intercultural relationships and integration experiences.
+                </p>
+            </section>
+            
+            <section>
+                <h2>About</h2>
+                <p>
+                    I am a PhD candidate at the University of California, Santa Barbara in the Department of Psychological 
+                    and Brain Sciences, working with Dr. Heejung Kim in the Cultural Psychology Lab. My work focuses on 
+                    immigrant perceptions, acculturation processes, and intergroup relations using both experimental and 
+                    large-scale quantitative methodologies.
+                </p>
+                <p>
+                    Before beginning my doctoral studies, I earned my M.Sc. in Cultural Psychology from the University of 
+                    Amsterdam and worked as a Junior Researcher at the Netherlands Institute for the Study of Crime and Law 
+                    Enforcement, where I examined police legitimacy and procedural justice for immigrant communities across Europe.
+                </p>
+            </section>
+            
+            <section>
+                <h2>Selected Projects</h2>
+                <ul class="project-list">
+                    <li>
+                        <div class="project-title">Intercultural Close Relationships</div>
+                        <div class="project-description">
+                            How do cultural differences shape the dynamics of close relationships, including romantic partnerships and friendships? This work examines challenges such as communication barriers and value misalignments, as well as adaptive processes like cultural learning and the development of shared relational practices. 
+                        </div>
+                    </li>
+                    <li>
+                        <div class="project-title">Vicarious Intergroup Contact and Immigrant Perceptions</div>
+                        <div class="project-description">
+                            This project investigates how observing interactions between immigrants and majority group members 
+                            influences interpersonal inferences about immigrants. The research examines the mechanisms through 
+                            which vicarious contact shapes attitudes and behavioral intentions toward immigrant communities.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="project-title">Accent Bias and Place of Origin</div>
+                        <div class="project-description">
+                            How do linguistic cues interact with information about immigrants' place of origin to shape 
+                            impressions and evaluations? This work contributes to understanding the multifaceted nature of 
+                            immigrant stigma and discrimination in contemporary society.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="project-title">Police Legitimacy in Europe</div>
+                        <div class="project-description">
+                            Using large-scale cross-national data, this research identifies how immigrant status and experiences 
+                            of ethnic discrimination influence perceptions of police legitimacy across European contexts, with 
+                            implications for policing policy and community relations.
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Publications</h2>
+                <ul class="publication-list">
+                    <li>
+                        <div class="publication-title">
+                            Fernández-Villà, G., & Kim, H. S. (Under Review). The Intercultural Interdependence Model: Understanding the Dynamics of Intercultural Close Relationships with Interdependence Theory.
+
+                        </div>
+                    </li>
+                    <li>
+                        <div class="publication-title">
+                            Fernández-Villà, G., van Hall, M., & Dirkzwager, A. J. E. (2023). Sources of Police Legitimacy in Europe: 
+                            The Role of Immigrant Status and Ethnic Discrimination. <em>European Journal on Criminal Policy and Research</em>, 1-22.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="publication-title">
+                            Fernández-Villà, G., & Musu, L. (2021). "Follow me for more content": How does social media use relate to 
+                            activism among young people? <em>IEA Compass: Briefs in Education</em>, 15.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="publication-title">
+                            Fernández-Villà, G. (In Press). Research in Action: The Weight of Words: Accent Bias in Childhood. 
+                            In G. Martorell (Ed.), <em>Experience Human Development</em>. McGraw-Hill Higher Education.
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Guillem Fernández Villà.</p>
+        </footer>
+    </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for fade-in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            sec
